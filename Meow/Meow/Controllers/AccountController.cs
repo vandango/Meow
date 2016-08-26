@@ -50,20 +50,28 @@ namespace Meow.Controllers
         }
 
         // GET: ProfileCat
-        public ActionResult ProfileCat(long id)
+        public ActionResult ProfileCat(long? id)
         {
             //greife ins backend
-            Cat cat =_context.Find(id);
  
             var model = new ProfileCatModel()
             {
-                CreatedAt = cat.Created,
-                Email = cat.Email,
-                Password = cat.Password,
-                Username = cat.Username
+                CreatedAt = DateTime.MinValue,
+                Email = "unknown",
+                Password = "unknown",
+                Username = "unknown"
             };
+
+            if (id != null) {
+                Cat cat = _context.Find(id ?? -1);
+                model.CreatedAt = cat.Created;
+                model.Email = cat.Email;
+                model.Password = cat.Password;
+                model.Username = cat.Username;
+            }
             
             return View(model);
         }
     }
 }
+ 
