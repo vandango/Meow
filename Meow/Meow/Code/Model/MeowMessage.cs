@@ -11,7 +11,6 @@ namespace Meow.Code.Model
         public long Id { get; set; }
         public string text { get; set; }
         public virtual Cat cat { get; set;}
-        public virtual Topic topic { get; set; }
         public DateTime CreatedAdd { get; set; }
 
     }
