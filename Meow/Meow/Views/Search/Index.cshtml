@@ -7,12 +7,12 @@
 Suche nach Meows
 <form method="post">
     <input type="text" name="SearchString" id="SearchString" />
-    <input type="submit" name="Suchen" />
+    <button type="submit" name="Suchen" id="Suchen">Suchen</button>
 </form>
 
 @if(Model != null && Model.Meows != null)
 {
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Datum</th>
@@ -23,8 +23,8 @@ Suche nach Meows
             @foreach (var Meow in Model.Meows)
             {
                 <tr>
-                    <td>@Meow.Created</td>
-                    <td>@Meow.Username</td>
+                    <td>@Meow.Created.ToString("yyyy.MM.dd")</td>
+                    <td>@Meow.Text</td>
                 </tr>
             }
         </tbody>

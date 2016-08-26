@@ -8,7 +8,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Meow.Code.DAL
 {
-    public class MeowContext : DbContext
+    public class MeowContext : DbContext, IMeowContext
     {
         public MeowContext() : base("MeowContext")
         {
@@ -16,6 +16,21 @@ namespace Meow.Code.DAL
 
         public DbSet<Cat> Cats { get; set; }
         public DbSet<MeowMessage> Meows { get; set; }
+
+        public void AddCat(Cat cat)
+        {
+            Cats.Add(cat);
+        }
+
+        public Cat Find(long id)
+        {
+            return Cats.Find(id);
+        }
+
+        public void Save()
+        {
+            this.SaveChanges();
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -20,12 +20,12 @@ namespace Meow.Controllers
         [HttpPost]
         public ActionResult Index(SearchModel model)
         {
-            var meows = from m in _context.Cats select m;
+            var meows = from m in _context.Meows select m;
             string SearchString = model.SearchString;
             if (!String.IsNullOrEmpty(SearchString))
             {
                 //TODO Change from Cats to Meows
-                meows = meows.Where(m => m.Username.Contains(SearchString));
+                meows = meows.Where(m => m.Text.Contains(SearchString));
             }
             return View(new SearchModel() {Meows = meows.ToList()});
         }
