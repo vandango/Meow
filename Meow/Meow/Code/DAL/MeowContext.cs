@@ -21,14 +21,11 @@ namespace Meow.Code.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             //one-to-many 
-            //modelBuilder.Entity<Topic>()
-            //            .HasRequired<Cat>(s => s.Owner);
-            //modelBuilder.Entity<Meow>()
-            //          .HasRequired<Cat>(s => s.Cat)
-            //          .WithMany(s => s.Meows);
-            //modelBuilder.Entity<Meow>()
-            //        .HasRequired<Topic>(s => s.Topic)
-            //        .WithMany(s => s.meows);
+         
+            modelBuilder.Entity<MeowMessage>()
+                     .HasRequired<Cat>(s => s.Cat)
+                    .WithMany(s => s.Meows);
+        
 
         }
 
