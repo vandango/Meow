@@ -63,8 +63,13 @@ namespace Meow.Controllers
         // GET: ProfileCat
         public ActionResult ProfileCat(long? id)
         {
+            if (id == null)
+            {
+                return Redirect("/Account/NotFound");
+            }
+
+            Cat cat = _context.Find(id ?? -1);
             //greife ins backend
- 
             if (cat != null)
             {
                 var model = new ProfileCatModel()
