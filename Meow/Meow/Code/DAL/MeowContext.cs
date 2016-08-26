@@ -15,8 +15,8 @@ namespace Meow.Code.DAL
         }
 
         public DbSet<Cat> Cats { get; set; }
-        public DbSet<Meow> meows { get; set; }
-        public DbSet<Topic> topics { get; set; }
+        public DbSet<Meow> Meows { get; set; }
+        public DbSet<Topic> Topics { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
