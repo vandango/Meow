@@ -22,11 +22,13 @@ namespace Meow.Controllers
 
         [HttpPost]
         public ActionResult Index(IndexModel model)
-        { MeowMessage meowMessage = new MeowMessage();
-            Cat cat = new Cat();
-            cat.Id = 1;
-            meowMessage.Text = model.Text;
-            meowMessage.Cat = cat;
+        {
+            var meowMessage = new MeowMessage()
+            {
+                Text = model.Text,
+                Cat = _context.Cats.FirstOrDefault(c => c.Id == 1),
+                Created = DateTime.Now
+            };
    
             _context.Meows.Add(meowMessage);
             _context.SaveChanges();
