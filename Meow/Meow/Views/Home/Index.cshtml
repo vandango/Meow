@@ -3,31 +3,33 @@
 @{
     ViewBag.Title = "Index";
 }
+<br/>
+<br/>
 
-
-<form method="post">
-    <input type="text" name="Text"/>
-    <input type="submit" value="Meow!" />
+<form class="form-horizontal" method="post">
+    <input type="text" class="col-sm-5" name="Text"/>
+    <button type="submit" >Meow!</button>
 </form>
 
-<table>
+<br />
+<br />
+<br />
+
+<table class="table">
     <thead>
         <tr>
-            <th>Meow</th><th>meowed by</th>
+            <th>Meow</th><th>meowed by</th><th>at</th>
         </tr>
     </thead>
     <tbody>
-        <% foreach (var message in Messages) { %>
-        <tr>
-            <td>
-                <%= Html.Encode(message.Text) %>
-            </td>
-            <td>
-                <%= Html.Encode(message.Cat.Username) %>
-            </td>
-        </tr>
-        <% } %>
-    </tbody>
+        @foreach (var message in Model.Messages)
+            {
+            <tr>
+                <td>@message.Text</td>
+                <td>@message.Cat.Username</td>
+                <td>@message.Created.ToString("dd.MM.yyyy")</td>
+            </tr>
+        }   </tbody>
 </table>
 
 
