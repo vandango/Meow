@@ -4,10 +4,13 @@
     ViewBag.Title = "Search";
 }
 
-Suche nach Meows
 <form method="post">
-    <input type="text" name="SearchString" id="SearchString" />
-    <button type="submit" name="Suchen" id="Suchen">Suchen</button>
+    <div class="input-group">
+        <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="Search meows..." />
+        <span class="input-group-btn">
+            <button type="submit" name="Suchen" id="Suchen" class="btn btn-default">Suchen</button>
+        </span>
+</div>
 </form>
 
 @if(Model != null && Model.Meows != null)
