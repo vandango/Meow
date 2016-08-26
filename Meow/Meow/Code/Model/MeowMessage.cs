@@ -6,7 +6,7 @@ using Meow.Code.Model;
 
 namespace Meow.Code.Model
 {
-    public class Meow
+    public class MeowMessage
     {
         public long Id { get; set; }
         public string text { get; set; }
