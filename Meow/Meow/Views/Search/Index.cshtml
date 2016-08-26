@@ -5,6 +5,28 @@
 }
 
 Suche nach Meows
-<input type="text" name="schlagwort" id="schlagwort" />
-@{ 
+<form method="post">
+    <input type="text" name="SearchString" id="SearchString" />
+    <input type="submit" name="Suchen" />
+</form>
+
+@if(Model != null && Model.Meows != null)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Inhalt</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Meow in Model.Meows)
+            {
+                <tr>
+                    <td>@Meow.Created</td>
+                    <td>@Meow.Username</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

@@ -6,7 +6,8 @@ namespace Meow.Models.Search
 {
     public class SearchModel
     {
-        public String Schlagwort { get; set; }
-        public List<Cat> Cats { get; set; }
+        public string SearchString { get; set; }
+        //TODO Change from <Cat> to <Meow>
+        public List<Cat> Meows { get; set; }
     }
 }
