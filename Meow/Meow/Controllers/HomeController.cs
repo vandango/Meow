@@ -17,7 +17,11 @@ namespace Meow.Controllers
         {
             var model = new IndexModel();
             model.List = _context.Cats.ToList();
-            model.Messages = _context.Meows.ToList();
+
+            
+            _context.Meows.OrderByDescending(s => s.Created);
+            var meows = _context.Meows.Where(s => s.Cat.Username.Equals("jnaumann"));
+            model.Messages = meows.ToList();
             return View(model);
         }
 

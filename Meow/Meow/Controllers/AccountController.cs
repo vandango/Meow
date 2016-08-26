@@ -6,11 +6,14 @@ using System.Web.Mvc;
 using Meow.Code.DAL;
 using Meow.Code.Model;
 using Meow.Models.Account;
+using log4net;
 
 namespace Meow.Controllers
 {
     public class AccountController : Controller
     {
+        private static readonly ILog LOG = LogManager.GetLogger("AccountController");
+
         private IMeowContext _context = new MeowContext();
 
         public AccountController() {}
@@ -44,33 +47,44 @@ namespace Meow.Controllers
                 Created = DateTime.Now
             };
             _context.AddCat(cat);
-            _context.Save();
+            try
+            {
+                _context.Save();
+                return Redirect($"/Account/ProfileCat/{cat.Id}");
+            } catch (AccountException e)
+            {
+                LOG.Error(e.Message, e);
+                return Redirect("/Account/UnableToCreateAccount");
+            }
 
-            return Redirect($"/Account/ProfileCat/{cat.Id}");
+            
         }
 
         // GET: ProfileCat
         public ActionResult ProfileCat(long? id)
         {
-            //greife ins backend
- 
-            var model = new ProfileCatModel()
+            if (id == null)
             {
-                CreatedAt = DateTime.MinValue,
-                Email = "unknown",
-                Password = "unknown",
-                Username = "unknown"
-            };
-
-            if (id != null) {
-                Cat cat = _context.Find(id ?? -1);
-                model.CreatedAt = cat.Created;
-                model.Email = cat.Email;
-                model.Password = cat.Password;
-                model.Username = cat.Username;
+                return Redirect("/Account/NotFound");
             }
+
+            Cat cat = _context.Find(id ?? -1);
+            //greife ins backend
+            if (cat != null)
+            {
+                var model = new ProfileCatModel()
+                {
+                    CreatedAt = cat.Created,
+                    Email = cat.Email,
+                    Password = cat.Password,
+                    Username = cat.Username
+                };
             
-            return View(model);
+                return View(model);
+            } else
+            {
+                return Redirect("/Account/NotFound");
+            }
         }
     }
 }
