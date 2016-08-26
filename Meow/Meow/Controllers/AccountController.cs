@@ -61,10 +61,9 @@ namespace Meow.Controllers
         }
 
         // GET: ProfileCat
-        public ActionResult ProfileCat(long id)
+        public ActionResult ProfileCat(long? id)
         {
             //greife ins backend
-            Cat cat =_context.Find(id);
  
             if (cat != null)
             {
@@ -84,3 +83,4 @@ namespace Meow.Controllers
         }
     }
 }
+ 

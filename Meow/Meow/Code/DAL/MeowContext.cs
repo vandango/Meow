@@ -51,7 +51,7 @@ namespace Meow.Code.DAL
             modelBuilder.Entity<MeowMessage>()
                      .HasRequired<Cat>(s => s.Cat)
                     .WithMany(s => s.Meows);
-        
+            
 
         }
 
