@@ -38,7 +38,7 @@ namespace Meow.Controllers
             _context.Cats.Add(cat);
             _context.SaveChanges();
 
-            return Redirect($"/Account/Profile/{cat.Id}");
+            return Redirect($"/Account/ProfileCat/{cat.Id}");
         }
 
         // GET: ProfileCat
@@ -46,7 +46,7 @@ namespace Meow.Controllers
         {
             //greife ins backend
             Cat cat =_context.Cats.Find(id);
-
+ 
             var model = new ProfileCatModel()
             {
                 CreatedAt = cat.Created,
