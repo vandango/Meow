@@ -200,6 +200,7 @@
     <Compile Include="Code\DAL\MeowContext.cs" />
     <Compile Include="Code\DAL\MeowInitializer.cs" />
     <Compile Include="Code\Model\Cat.cs" />
+    <Compile Include="Code\Model\Follower.cs" />
     <Compile Include="Code\Model\MeowMessage.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
