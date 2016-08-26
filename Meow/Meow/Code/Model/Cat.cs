@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+
 
 namespace Meow.Code.Model
 {
     public class Cat
     {
         public long Id { get; set; }
+
+        [Index("IX_Username", IsUnique = true)]
         public string Username { get; set; }
         public string Password { get; set; }
         public DateTime Created { get; set; }
