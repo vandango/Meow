@@ -5,11 +5,16 @@ using System.Web;
 using System.Data.Entity;
 using Meow.Code.Model;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using log4net;
+using System.Data.Entity.Infrastructure;
 
 namespace Meow.Code.DAL
 {
     public class MeowContext : DbContext, IMeowContext
     {
+        private static readonly ILog LOG = LogManager.GetLogger("MeowContext");
+
+
         public MeowContext() : base("MeowContext")
         {
         }
@@ -30,7 +35,13 @@ namespace Meow.Code.DAL
 
         public void Save()
         {
-            this.SaveChanges();
+            try
+            {
+                this.SaveChanges();
+            } catch (DbUpdateException e)
+            {
+                throw new AccountException(e.Message, e);
+            }
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
