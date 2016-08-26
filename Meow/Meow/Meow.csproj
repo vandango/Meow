@@ -196,6 +196,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Code\DAL\IMeowContext.cs" />
     <Compile Include="Code\DAL\MeowContext.cs" />
     <Compile Include="Code\DAL\MeowInitializer.cs" />
     <Compile Include="Code\Model\Cat.cs" />

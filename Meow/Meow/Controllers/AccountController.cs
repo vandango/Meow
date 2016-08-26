@@ -11,7 +11,15 @@ namespace Meow.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly MeowContext _context = new MeowContext();
+        private IMeowContext _context = new MeowContext();
+
+        public AccountController() {}
+
+        public AccountController(IMeowContext context)
+        {
+            _context = context;
+        }
+
         // GET: Account
         public ActionResult Index()
         {
@@ -35,8 +43,8 @@ namespace Meow.Controllers
                 Email = model.Email,
                 Created = DateTime.Now
             };
-            _context.Cats.Add(cat);
-            _context.SaveChanges();
+            _context.AddCat(cat);
+            _context.Save();
 
             return Redirect($"/Account/ProfileCat/{cat.Id}");
         }
