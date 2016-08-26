@@ -22,8 +22,6 @@ namespace Meow.Code.DAL
             };
             cats.ForEach(cat => context.Cats.Add(cat));
             context.SaveChanges();
-
-            //
         }
     }
 }
