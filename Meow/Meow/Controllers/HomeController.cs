@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Meow.Models.Home;
 using Meow.Code.DAL;
+using Meow.Code.Model;
 
 namespace Meow.Controllers
 {
@@ -17,6 +18,24 @@ namespace Meow.Controllers
             var model = new IndexModel();
             model.List = _context.Cats.ToList();
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Index(IndexModel model)
+        {
+            var meowMessage = new MeowMessage()
+            {
+                Text = model.Text,
+                Cat = _context.Cats.FirstOrDefault(c => c.Id == 1),
+                Created = DateTime.Now
+            };
+   
+            _context.Meows.Add(meowMessage);
+            _context.SaveChanges();
+
+
+
+            return Index();
         }
     }
 }

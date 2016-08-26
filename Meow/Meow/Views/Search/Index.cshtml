@@ -1,0 +1,32 @@
+﻿@model Meow.Models.Search.SearchModel
+
+@{
+    ViewBag.Title = "Search";
+}
+
+Suche nach Meows
+<form method="post">
+    <input type="text" name="SearchString" id="SearchString" />
+    <button type="submit" name="Suchen" id="Suchen">Suchen</button>
+</form>
+
+@if(Model != null && Model.Meows != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Inhalt</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Meow in Model.Meows)
+            {
+                <tr>
+                    <td>@Meow.CreatedAdd.ToString("yyyy.MM.dd")</td>
+                    <td>@Meow.Text</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Meow.Code.DAL;
+using Meow.Code.Model;
 using Meow.Models.Account;
 
 namespace Meow.Controllers
@@ -35,7 +36,7 @@ namespace Meow.Controllers
         [HttpPost]
         public ActionResult RegisterCat(RegisterCatModel model)
         {
-            var cat = new Code.Model.Cat()
+            var cat = new Cat()
             {
                 Username = model.Username,
                 Password = model.Password,
@@ -45,7 +46,24 @@ namespace Meow.Controllers
             _context.AddCat(cat);
             _context.Save();
 
-            return Redirect($"/Account/Profile/{cat.Id}");
+            return Redirect($"/Account/ProfileCat/{cat.Id}");
+        }
+
+        // GET: ProfileCat
+        public ActionResult ProfileCat(long id)
+        {
+            //greife ins backend
+            Cat cat =_context.Cats.Find(id);
+ 
+            var model = new ProfileCatModel()
+            {
+                CreatedAt = cat.Created,
+                Email = cat.Email,
+                Password = cat.Password,
+                Username = cat.Username
+            };
+            
+            return View(model);
         }
     }
 }
