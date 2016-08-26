@@ -209,7 +209,6 @@
     <Compile Include="Models\Account\ProfileCatModel.cs" />
     <Compile Include="Models\Account\RegisterCatModel.cs" />
     <Compile Include="Models\Home\IndexModel.cs" />
-    <Compile Include="Models\Home\MessagesModel.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
