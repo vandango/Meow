@@ -4,9 +4,30 @@
     ViewBag.Title = "Index";
 }
 
-Hello .NET-World
 
 <form method="post">
     <input type="text" name="Text"/>
     <input type="submit" value="Meow!" />
 </form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Meow</th><th>meowed by</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% foreach (var message in Messages) { %>
+        <tr>
+            <td>
+                <%= Html.Encode(message.Text) %>
+            </td>
+            <td>
+                <%= Html.Encode(message.Cat.Username) %>
+            </td>
+        </tr>
+        <% } %>
+    </tbody>
+</table>
+
+

@@ -17,6 +17,7 @@ namespace Meow.Controllers
         {
             var model = new IndexModel();
             model.List = _context.Cats.ToList();
+            model.Messages = _context.Meows.ToList();
             return View(model);
         }
 
