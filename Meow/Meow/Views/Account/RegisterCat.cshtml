@@ -1,0 +1,14 @@
+﻿@model Meow.Models.Account.RegisterCatModel
+
+@{
+    ViewBag.Title = "Katze registrieren";
+}
+
+<h1>Neue Katze registrieren</h1>
+
+<form method="post">
+    <label for="Username">Katzenname</label><input type="text" name="Username"/>
+    <label for="Email">E-Mail</label><input type="text" name="Email" />
+    <label for="Password">Passwort</label><input type="password" name="Password" />
+    <input type="submit" value="Registrieren" />
+</form>
