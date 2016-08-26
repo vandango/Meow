@@ -6,10 +6,27 @@
 
 <h1>Das Profil der Katze</h1>
 
-<form method="post">
+<form method="get">
+       
+    <!---->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Katzenname</th>
+                <th>Passwort</th>
+                <th>E-Mail</th>
+                <th>Kätzchen seit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Username</td>
+                <td>@Model.Password</td>
+                <td>@Model.Email</td>
+                <td>@Model.CreatedAt</td>
+            </tr>
+        </tbody>
+    </table>
+    
 
-    <label for="Username">Katzenname</label>@Model.Username
-    <label for="Email">E-Mail</label>@Model.Email
-    <label for="Password">Passwort</label>@Model.Password
-    <label for="Password">Kätzchen seit</label>@Model.CreatedAt
 </form>
