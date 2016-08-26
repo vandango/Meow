@@ -12,8 +12,7 @@ namespace Meow.Code.DAL
 {
     public class MeowContext : DbContext, IMeowContext
     {
-        private static readonly ILog LOG = LogManager.GetLogger("MeowContext");
-
+        private static readonly ILog LOG = LogManager.GetLogger(typeof(MeowContext));
 
         public MeowContext() : base("MeowContext")
         {
@@ -37,9 +36,10 @@ namespace Meow.Code.DAL
             try
             {
                 this.SaveChanges();
-            } catch (DbUpdateException e)
+            }
+            catch (DbUpdateException e)
             {
-                throw new AccountException(e.Message, e);
+                throw new AccountCreationException(e.Message, e);
             }
         }
 

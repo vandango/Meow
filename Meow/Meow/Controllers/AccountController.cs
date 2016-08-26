@@ -10,6 +10,7 @@ using log4net;
 
 namespace Meow.Controllers
 {
+    [HandleError(ExceptionType = typeof(AccountCreationException), View = "/Account/UnableToCreateAccount")]
     public class AccountController : Controller
     {
         private static readonly ILog LOG = LogManager.GetLogger("AccountController");
@@ -47,17 +48,8 @@ namespace Meow.Controllers
                 Created = DateTime.Now
             };
             _context.AddCat(cat);
-            try
-            {
-                _context.Save();
-                return Redirect($"/Account/ProfileCat/{cat.Id}");
-            } catch (AccountException e)
-            {
-                LOG.Error(e.Message, e);
-                return Redirect("/Account/UnableToCreateAccount");
-            }
-
-            
+            _context.Save();
+            return Redirect($"/Account/ProfileCat/{cat.Id}");         
         }
 
         // GET: ProfileCat

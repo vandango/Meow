@@ -13,6 +13,7 @@ namespace MeowTest
     [TestClass]
     public class TestAccountController
     {
+
         private AccountController accountController;
 
         private IMeowContext meowContext;
@@ -22,12 +23,14 @@ namespace MeowTest
         [TestInitialize]
         public void setup()
         {
-            meowContext = MockRepository.GenerateStub<IMeowContext>();
-            meowContext.Stub(ctx => ctx.AddCat(Arg<Cat>.Is.Anything)).WhenCalled(mi =>
+            cats.Clear();
+            meowContext = MockRepository.GenerateMock<IMeowContext>();
+            meowContext.Expect(f => f.AddCat(Arg<Cat>.Is.Anything)).WhenCalled(mi =>
             {
                 var cat = (Cat)mi.Arguments[0];
                 cats.Add(cat.Username, cat);
-            });
+            }).Repeat.Once();
+            meowContext.Expect(f => f.AddCat(Arg<Cat>.Is.Anything)).Throw(new AccountCreationException("Duplicate account"));
 
             accountController = new AccountController(meowContext);
         }
@@ -35,15 +38,20 @@ namespace MeowTest
         [TestMethod]
         public void TestRegisterCat()
         {
-            var registerCatModel = new RegisterCatModel() { Username = "testCat1", Email = "testMai", Password = "test123" };
+            var registerCatModel = new RegisterCatModel() { Username = "testCat1", Email = "testMail@mail.com", Password = "test123" };
             accountController.RegisterCat(registerCatModel);
 
             meowContext.AssertWasCalled(ctx => ctx.AddCat(Arg<Cat>.Matches(c => c.Username.Equals("testCat1"))));
             meowContext.AssertWasCalled(ctx => ctx.Save());
+
+            Assert.AreEqual(1, cats.Count);
+            var theCat = cats["testCat1"];
+            Assert.IsNotNull(theCat);
+            Assert.AreEqual("testMail@mail.com", theCat.Email);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.ArgumentException))]
+        [ExpectedException(typeof(AccountCreationException))]
         public void TestRegisterCatUniqueUsername()
         {
             var registerCatModel = new RegisterCatModel() { Username = "testCat1", Email = "testMail@mail.com", Password = "test123" };

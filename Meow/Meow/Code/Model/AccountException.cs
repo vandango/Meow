@@ -5,10 +5,12 @@ using System.Web;
 
 namespace Meow.Code.Model
 {
-    public class AccountException : Exception
+    public class AccountCreationException : Exception
     {
-        public AccountException(string message, Exception innerException) : base(message, innerException)
+        public AccountCreationException(string message, Exception innerException) : base(message, innerException)
         {
         }
+
+        public AccountCreationException(string message) : base(message) { }
     }
 }
