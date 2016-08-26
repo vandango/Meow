@@ -22,6 +22,11 @@ namespace Meow.Code.DAL
             Cats.Add(cat);
         }
 
+        public Cat Find(long id)
+        {
+            return Cats.Find(id);
+        }
+
         public void Save()
         {
             this.SaveChanges();

@@ -53,7 +53,7 @@ namespace Meow.Controllers
         public ActionResult ProfileCat(long id)
         {
             //greife ins backend
-            Cat cat =_context.Cats.Find(id);
+            Cat cat =_context.Find(id);
  
             var model = new ProfileCatModel()
             {
