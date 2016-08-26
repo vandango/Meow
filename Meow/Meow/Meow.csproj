@@ -201,6 +201,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account\ProfileCatModel.cs" />
     <Compile Include="Models\Account\RegisterCatModel.cs" />
     <Compile Include="Models\Home\IndexModel.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />
@@ -214,6 +215,7 @@
     </Content>
     <Content Include="scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Account\RegisterCat.cshtml" />
+    <Content Include="Views\Account\ProfileCat.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
