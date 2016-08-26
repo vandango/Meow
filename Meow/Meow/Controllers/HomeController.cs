@@ -18,5 +18,12 @@ namespace Meow.Controllers
             model.List = _context.Cats.ToList();
             return View(model);
         }
+
+        public ActionResult createMeow()
+
+        {
+            var model = new MessagesModel();
+         return View(model);
+        }
     }
 }
