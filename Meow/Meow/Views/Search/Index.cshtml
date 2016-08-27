@@ -44,11 +44,11 @@
                             <text>&dash;</text>
                             if (Model.CatsFollowing.Any(c => c.Id == Meow.Cat.Id))
                             {
-                                <a href="/Follower/Unfollow/@Meow.Cat.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery + "/" + Model.SearchString)">Moew?</a>
+                                <a href="/Follower/Follow/@Meow.Cat.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery + "/" + Model.SearchString)">Moew?</a>
                             }
                             else
                             {
-                                <a href="/Follower/Follow/@Meow.Cat.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery + "/" + Model.SearchString)">Please no moew!</a>
+                                <a href="/Follower/Unfollow/@Meow.Cat.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery + "/" + Model.SearchString)">Please no moew!</a>
                             }
                         }
                     </td>
