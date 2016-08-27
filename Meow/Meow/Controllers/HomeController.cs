@@ -16,12 +16,24 @@ namespace Meow.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            Session["CurrentCat"] = _context.Cats.FirstOrDefault(c => c.Id == 1);
+
+            Cat currentCat = (Cat)Session["CurrentCat"];
+
+            var followers = _context.Follower.Where(f => f.IsFollowing == currentCat.Id).ToList();
+
+            List<long> ids = new List<long>();
+
+            foreach (Follower follower in followers)
+            {
+                ids.Add(follower.IsFollowing);
+            }
+            ids.Add(currentCat.Id);
+
             var model = new IndexModel();
-            model.List = _context.Cats.ToList();
 
-
-            _context.Meows.OrderByDescending(s => s.Created);
-            var meows = _context.Meows.Where(s => s.Cat.Username.Equals("jnaumann"));
+            var meows = _context.Meows.Where(s => ids.Contains(s.Cat.Id));
+            meows.OrderByDescending(s => s.Created);
             model.Messages = meows.ToList();
             return View(model);
         }
