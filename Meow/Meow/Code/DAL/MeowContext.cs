@@ -50,6 +50,9 @@ namespace Meow.Code.DAL
             //one-to-many 
          
             modelBuilder.Entity<MeowMessage>().HasRequired<Cat>(s => s.Cat).WithMany(s => s.Meows);
+            //modelBuilder.Entity<Follower>().HasRequired<Cat>(f => f.IsFollowing).WithMany(f => f.Follower);
+            //modelBuilder.Entity<Follower>().HasRequired<Cat>(f => f.IsBeingFollowed).WithMany(f => f.Follower);
+
         }
 
     }
