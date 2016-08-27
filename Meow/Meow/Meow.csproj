@@ -203,6 +203,7 @@
     <Compile Include="Code\Model\AccountException.cs" />
     <Compile Include="Code\Model\Follower.cs" />
     <Compile Include="Code\Model\MeowMessage.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\MeowController.cs" />
     <Compile Include="Controllers\FollowerController.cs" />
@@ -211,7 +212,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Account\ProfileCatModel.cs" />
+    <Compile Include="Models\Profile\ProfileCatModel.cs" />
     <Compile Include="Models\Account\RegisterCatModel.cs" />
     <Compile Include="Models\Follower\FollowerModel.cs" />
     <Compile Include="Models\Home\IndexModel.cs" />
@@ -228,10 +229,13 @@
     </Content>
     <Content Include="scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Account\RegisterCat.cshtml" />
-    <Content Include="Views\Account\ProfileCat.cshtml" />
+    <Content Include="Views\Profile\ProfileCat.cshtml" />
     <Content Include="Views\Account\UnableToCreateAccount.cshtml" />
     <Content Include="Views\Follower\Index.cshtml" />
-    <Content Include="Views\Profile\Login.cshtml" />
+    <Content Include="Views\_Shared\_Error.cshtml" />
+    <Content Include="static-html\NotFound.html" />
+    <Content Include="static-html\Credits.html" />
+	<Content Include="Views\Profile\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
