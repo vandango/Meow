@@ -228,6 +228,7 @@
     <Content Include="Views\Account\RegisterCat.cshtml" />
     <Content Include="Views\Account\ProfileCat.cshtml" />
     <Content Include="Views\Account\UnableToCreateAccount.cshtml" />
+    <Content Include="Views\Follower\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
