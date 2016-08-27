@@ -20,7 +20,7 @@
         <p>@message.Text</p>
         <footer>
             @Html.ActionLink(message.Cat.Username, $"ProfileCat/{message.Cat.Id}", "Profile")
-            @message.Created.ToString("dd.MM.yyyy hh:mm")
+            @message.Created.ToString("dd.MM.yyyy HH:mm")
         </footer>
     </blockquote>
 }
