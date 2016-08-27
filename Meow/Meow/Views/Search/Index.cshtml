@@ -42,7 +42,7 @@
                         @if (Meow.Cat.Id != cat.Id)
                         {
                             <text>&dash;</text>
-                            if (Model.CatsFollowing.Any(c => c.Id == Meow.Id))
+                            if (Model.CatsFollowing.Any(c => c.Id == Meow.Cat.Id))
                             {
                                 <a href="/Follower/Follow/@Meow.Cat.Id">Moew?</a>
                             }
