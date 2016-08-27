@@ -3,25 +3,28 @@
 @{
     ViewBag.Title = "Index";
 }
-<br/>
-<br/>
-
-<form class="form-horizontal center-block" method="post">
-    <input type="text" class="col-sm-5" name="Text"/>
-    <button type="submit" >Meow!</button>
+<h2>Neuen Meow verfassen</h2>
+<form class="form-horizontal left meowbox" method="post">
+    <div class="form-group">
+        <textarea class="form-control" name="Text" placeholder="Meow..."></textarea>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-default" type="submit">Meow!</button>
+    </div>
 </form>
 
+<h2>Timeline</h2>
 @foreach (var message in Model.Messages)
             {
     <blockquote class="col-lg-4">
         <p>@message.Text</p>
         <footer>
-            @message.Cat.Username
-            <a href="/Home/Index">@message.Created.ToString("dd.MM.yyyy")</a>
+            @Html.ActionLink(message.Cat.Username, $"ProfileCat/{message.Cat.Id}", "Profile")
+            @message.Created.ToString("dd.MM.yyyy hh:mm")
         </footer>
     </blockquote>
 }
-<p/>
+<p class="afterMeows"/>
 
 
 
