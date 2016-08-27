@@ -20,6 +20,10 @@ namespace Meow.Controllers
             if (!string.IsNullOrWhiteSpace(searchString))
             {
                 Cat currentCat = (Cat)Session[Constants.CURRENT_CAT_KEY];
+                if (currentCat == null)
+                {
+                    return Redirect("/Home/Login");
+                }
                 var myFollowingIds = from f in _context.Followers where f.IsFollowing.Equals(currentCat.Id) select f.IsBeingFollowed;
                 var myFollowingCats = (
                     from c in _context.Kitties

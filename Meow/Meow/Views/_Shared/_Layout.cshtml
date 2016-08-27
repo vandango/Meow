@@ -45,9 +45,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Suchen", "Index", "Search")</li>                    
                     @if (cat != null)
                     {
+                        <li>@Html.ActionLink("Suchen", "Index", "Search")</li>
                         <li>@Html.ActionLink("Follower", "Index", "Follower")</li>
                         <li><a href="/Profile/ProfileCat/@cat.Id">Profil</a></li>
                         <li>@Html.ActionLink("Logout (" + cat.Username + ")", "Logout", "Home")</li>
