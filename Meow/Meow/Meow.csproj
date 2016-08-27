@@ -196,6 +196,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Code\DAL\IMeowContext.cs" />
     <Compile Include="Code\DAL\MeowContext.cs" />
     <Compile Include="Code\DAL\MeowInitializer.cs" />
@@ -235,7 +236,7 @@
     <Content Include="Views\_Shared\_Error.cshtml" />
     <Content Include="static-html\NotFound.html" />
     <Content Include="static-html\Credits.html" />
-	<Content Include="Views\Profile\Login.cshtml" />
+    <Content Include="Views\Profile\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

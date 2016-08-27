@@ -50,6 +50,8 @@ namespace Meow.Controllers
             var loggedInCat = _context.FindByCredentials(model.Username, model.Password);
             if (loggedInCat != null)
             {
+                //put verified cat in sessioncontext
+                Session.Add(Constants.CURRENT_CAT_KEY, loggedInCat);
                 return Redirect("/");
             } else
             {
