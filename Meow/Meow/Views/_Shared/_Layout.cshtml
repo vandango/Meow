@@ -1,4 +1,13 @@
 ﻿@using System.Web.Optimization
+@using Meow.Code.Model;
+
+@{
+    Cat cat = null;
+    if (Session[Constants.CURRENT_CAT_KEY] != null) {
+        cat = (Cat)Session[Constants.CURRENT_CAT_KEY];
+    }
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,10 +44,17 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Register", "RegisterCat", "Account")</li>
-                    <li>@Html.ActionLink("Login", "Login", "Home")</li>
-                    <li>@Html.ActionLink("Suchen", "Index", "Search")</li>
-                    <li>@Html.ActionLink("Follower", "Index", "Follower")</li>
+                    <li>@Html.ActionLink("Suchen", "Index", "Search")</li>                    
+                    @if (cat != null)
+                    {
+                        <li>@Html.ActionLink("Follower", "Index", "Follower")</li>
+                        <li>@Html.ActionLink("Logout (" + cat.Username + ")", "Logout", "Home")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Register", "RegisterCat", "Account")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                    }
                 </ul>
             </div>
         </div>
