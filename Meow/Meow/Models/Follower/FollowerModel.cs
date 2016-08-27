@@ -8,7 +8,7 @@ namespace Meow.Models.Follower
 {
     public class FollowerModel
     {
-        public List<Cat> CatsBeingFollowed;
-        public List<Cat> CatsFollowing;
+        public List<Cat> CatsBeingFollowed { get; set; }
+        public List<Cat> CatsFollowing { get; set; }
     }
 }
