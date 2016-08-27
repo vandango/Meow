@@ -159,6 +159,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Lion-vector.png" />
+    <Content Include="Content\meow.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.19-build00125.js" />
@@ -171,6 +173,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\MeowCofinpro.pubxml" />
     <None Include="scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
@@ -206,8 +209,8 @@
     <Compile Include="Code\Model\MeowMessage.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Api\MeowController.cs" />
     <Compile Include="Controllers\FollowerController.cs" />
+    <Compile Include="Controllers\Api\MeowsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
@@ -216,6 +219,7 @@
     <Compile Include="Models\Profile\ProfileCatModel.cs" />
     <Compile Include="Models\Account\RegisterCatModel.cs" />
     <Compile Include="Models\Follower\FollowerModel.cs" />
+    <Compile Include="Models\Api\MeowMessageApi.cs" />
     <Compile Include="Models\Home\IndexModel.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

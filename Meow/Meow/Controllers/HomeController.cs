@@ -81,5 +81,14 @@ namespace Meow.Controllers
                 return View();
             }
         }
+
+        public ActionResult Logout()
+        {
+            if (Session[Constants.CURRENT_CAT_KEY] != null)
+            {
+                Session.Remove(Constants.CURRENT_CAT_KEY);
+            }
+            return Redirect("/");
+        }
     }
 }
