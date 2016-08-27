@@ -17,14 +17,14 @@ namespace Meow.Controllers.Api
 
 		private bool MeowExists(int id)
 		{
-			return _meowContext.Meows.Count(e => e.Id == id) > 0;
+			return _meowContext.Meows().Count(e => e.Id == id) > 0;
 		}
 
 		// GET: api/Meow
 		public IQueryable<MeowMessageApi> GetMeowMessages()
 		{
 			return from m 
-                   in _meowContext.Meows
+                   in _meowContext.Meows()
                    select new MeowMessageApi()
                    {
                        Id = m.Id,
@@ -41,7 +41,7 @@ namespace Meow.Controllers.Api
 		[ResponseType(typeof(MeowMessageApi))]
 		public IHttpActionResult GetMeow(int id)
 		{
-			var meow = _meowContext.Meows.FirstOrDefault((p) => p.Id == id);
+			var meow = _meowContext.Meows().FirstOrDefault((p) => p.Id == id);
 			if(meow == null)
 			{
 				return NotFound();
@@ -67,13 +67,13 @@ namespace Meow.Controllers.Api
 				return BadRequest(ModelState);
 			}
 
-		    var cat = _meowContext.Cats.FirstOrDefault(c => c.Id == meow.CatId);
+		    var cat = _meowContext.Cats().FirstOrDefault(c => c.Id == meow.CatId);
 		    if (cat == null)
 		    {
 		        return NotFound();
 		    }
 
-			_meowContext.Meows.Add(new MeowMessage()
+			_meowContext.Meows().Add(new MeowMessage()
 			{
 			    Text = meow.Text,
                 Cat = cat,
@@ -98,7 +98,7 @@ namespace Meow.Controllers.Api
 				return BadRequest();
 			}
 
-            var existingMeow = _meowContext.Meows.Find(id);
+            var existingMeow = _meowContext.Meows().Find(id);
             if(existingMeow == null)
             {
                 return NotFound();
@@ -132,14 +132,14 @@ namespace Meow.Controllers.Api
 		[ResponseType(typeof(MeowMessageApi))]
 		public IHttpActionResult DeleteMeow(int id)
 		{
-            var meow = _meowContext.Meows.Find(id);
+            var meow = _meowContext.Meows().Find(id);
             if(meow == null)
             {
                 return NotFound();
             }
 
-            _meowContext.Meows.Remove(meow);
-            _meowContext.SaveChanges();
+			_meowContext.Meows().Remove(meow);
+			_meowContext.SaveChanges();
 
             return Ok(meow);
         }

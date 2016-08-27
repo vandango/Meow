@@ -17,19 +17,19 @@ namespace Meow.Controllers
         public ActionResult Index()
         {
             long uId = this.getCurrentUserId();
-            var myFollowerIds = from f in _context.Follower where f.IsBeingFollowed.Equals(uId) select f.IsFollowing;
-            var myFollowerCats = from c in _context.Cats where myFollowerIds.ToList().Contains(c.Id) select c;
+            var myFollowerIds = from f in _context.Follower() where f.IsBeingFollowed.Equals(uId) select f.IsFollowing;
+            var myFollowerCats = from c in _context.Cats() where myFollowerIds.ToList().Contains(c.Id) select c;
 
-            var myFollowingIds = from f in _context.Follower where f.IsFollowing.Equals(uId) select f.IsBeingFollowed;
-            var myFollowingCats = from c in _context.Cats where myFollowingIds.ToList().Contains(c.Id) select c;
+            var myFollowingIds = from f in _context.Follower() where f.IsFollowing.Equals(uId) select f.IsBeingFollowed;
+            var myFollowingCats = from c in _context.Cats() where myFollowingIds.ToList().Contains(c.Id) select c;
 
             return View(new FollowerModel() { CatsBeingFollowed = myFollowerCats.ToList(), CatsFollowing = myFollowingCats.ToList() });
         }
         public ActionResult Unfollow(long id)
         {
-            var FollowerToDelete = from f in _context.Follower where f.IsBeingFollowed.Equals(id) && f.IsFollowing.Equals(this.getCurrentUserId()) select f;
+            var FollowerToDelete = from f in _context.Follower() where f.IsBeingFollowed.Equals(id) && f.IsFollowing.Equals(this.getCurrentUserId()) select f;
             Follower Follower = FollowerToDelete.ToList()[0];
-            _context.Follower.Remove(Follower);
+            _context.Follower().Remove(Follower);
             _context.SaveChanges();
             return Redirect("/Follower");
         }

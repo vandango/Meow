@@ -20,7 +20,7 @@ namespace Meow.Code.DAL
                 new Cat() { Email = "mhinz@mail.com", Password = "mhinz", Username = "mhinz", Created = DateTime.Now },
                 new Cat() { Email = "chuff@mail.com", Password = "chuff", Username = "chuff", Created = DateTime.Now }
             };
-            cats.ForEach(cat => context.Cats.Add(cat));
+            cats.ForEach(cat => context.Cats().Add(cat));
             context.SaveChanges();
             var followers = new List<Follower>();
             for (int i = 1; i < 5; i++)
@@ -33,7 +33,7 @@ namespace Meow.Code.DAL
                     }
                 }
             }
-            followers.ForEach(follower => context.Follower.Add(follower));
+            followers.ForEach(follower => context.Follower().Add(follower));
             context.SaveChanges();
             foreach (var cat in cats)
             {
