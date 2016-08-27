@@ -29,7 +29,7 @@ namespace Meow.Controllers
 
             foreach (Follower follower in followers)
             {
-                ids.Add(follower.IsFollowing);
+                ids.Add(follower.IsBeingFollowed);
             }
             ids.Add(currentCat.Id);
 
