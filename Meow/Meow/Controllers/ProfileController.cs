@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Meow.Code.DAL;
 using Meow.Code.Model;
-using Meow.Models.Account;
+using Meow.Models.Profile;
 using log4net;
 
 namespace Meow.Controllers
@@ -29,7 +29,7 @@ namespace Meow.Controllers
         {
             if (id == null)
             {
-                return Redirect("/Profile/NotFound");
+                return Redirect("/static-html/NotFound.html");
             }
 
             Cat cat = _context.Find(id ?? -1);
@@ -47,7 +47,7 @@ namespace Meow.Controllers
                 return View(model);
             } else
             {
-                return Redirect("/Profile/NotFound");
+                return Redirect("/static-html/NotFound.html");
             }
         }
 
