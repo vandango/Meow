@@ -20,7 +20,7 @@ namespace Meow.Code.DAL
 
         public DbSet<Cat> Cats { get; set; }
         public DbSet<MeowMessage> Meows { get; set; }
-        //public DbSet<Follower> Follower { get; set; }
+        public DbSet<Follower> Follower { get; set; }
 
         public void AddCat(Cat cat)
         {

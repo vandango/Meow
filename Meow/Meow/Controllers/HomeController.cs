@@ -15,12 +15,21 @@ namespace Meow.Controllers
         // GET: Home
         public ActionResult Index()
         {
+
+            Session["CurrentCat"] = _context.Cats.FirstOrDefault(c => c.Id == 1);
+
+            Cat currentCat = (Cat)Session["CurrentCat"];
+
+            var ids = _context.Follower.Where(f => f.IsFollowing == currentCat.Id).ToList();
+
+
+
             var model = new IndexModel();
             model.List = _context.Cats.ToList();
 
             
-            _context.Meows.OrderByDescending(s => s.Created);
-            var meows = _context.Meows.Where(s => s.Cat.Username.Equals("jnaumann"));
+            var meows = _context.Meows.Where(s => s.Cat.Id == currentCat.Id);
+            meows.OrderByDescending(s => s.Created);
             model.Messages = meows.ToList();
             return View(model);
         }
