@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Meow.Models.Home;
 using Meow.Code.DAL;
 using Meow.Code.Model;
+using Meow.Models.Account;
 
 namespace Meow.Controllers
 {
@@ -18,7 +19,7 @@ namespace Meow.Controllers
             var model = new IndexModel();
             model.List = _context.Cats.ToList();
 
-            
+
             _context.Meows.OrderByDescending(s => s.Created);
             var meows = _context.Meows.Where(s => s.Cat.Username.Equals("jnaumann"));
             model.Messages = meows.ToList();
@@ -41,6 +42,19 @@ namespace Meow.Controllers
 
 
             return Index();
+        }
+
+        [HttpPost]
+        public ActionResult Login(ProfileCatModel model)
+        {
+            var loggedInCat = _context.FindByCredentials(model.Username, model.Password);
+            if (loggedInCat != null)
+            {
+                return Redirect("/");
+            } else
+            {
+                return View();
+            }
         }
     }
 }
