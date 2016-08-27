@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Meow.Models.Home;
 using Meow.Code.DAL;
 using Meow.Code.Model;
-using Meow.Models.Account;
+using Meow.Models.Profile;
 
 namespace Meow.Controllers
 {
