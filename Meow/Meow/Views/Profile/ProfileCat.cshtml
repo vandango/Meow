@@ -23,6 +23,7 @@
                 <th>Passwort</th>
                 <th>E-Mail</th>
                 <th>Kätzchen seit</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -32,17 +33,19 @@
                 <td>@Model.Email</td>
                 <td>@Model.CreatedAt</td>
                 <td>
-                @if (me.Username != Model.Username)
+                @if (me.Id != Model.Id)
                 {
-                    <text>&dash;</text>
-                    if (Model.CatsFollowing.Any(c => c.Id == me.Id))
-                        //testeme!!
+                    if (Model.CatsFollowing.Any(c => c.Id == Model.Id))
                     {
-                        <a href="/Follower/Follow/@Model.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery)">Moew?</a>
+                        <a class="btn btn-danger" href="/Follower/Unfollow/@Model.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery )">
+                            Please no moew!
+                        </a>
                     }
                     else
                     {
-                        <a href="/Follower/Unfollow/@Model.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery)">Please no moew!</a>
+                        <a class="btn btn-success" href="/Follower/Follow/@Model.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery )">
+                            Moew?
+                        </a>
                     }
                 }
                 </td>
