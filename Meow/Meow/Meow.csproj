@@ -203,6 +203,7 @@
     <Compile Include="Code\Model\AccountException.cs" />
     <Compile Include="Code\Model\Follower.cs" />
     <Compile Include="Code\Model\MeowMessage.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -225,8 +226,10 @@
     </Content>
     <Content Include="scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Account\RegisterCat.cshtml" />
-    <Content Include="Views\Account\ProfileCat.cshtml" />
+    <Content Include="Views\Profile\ProfileCat.cshtml" />
     <Content Include="Views\Account\UnableToCreateAccount.cshtml" />
+    <Content Include="Views\_Shared\_Error.cshtml" />
+    <Content Include="Views\Profile\NotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
