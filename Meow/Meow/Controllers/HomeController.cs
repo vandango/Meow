@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Meow.Models.Home;
 using Meow.Code.DAL;
 using Meow.Code.Model;
+using Meow.Models.Profile;
 
 namespace Meow.Controllers
 {
@@ -15,12 +16,27 @@ namespace Meow.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var model = new IndexModel();
-            model.List = _context.Cats.ToList();
 
-            
-            _context.Meows.OrderByDescending(s => s.Created);
-            var meows = _context.Meows.Where(s => s.Cat.Username.Equals("jnaumann"));
+            Cat currentCat = (Cat)Session[Constants.CURRENT_CAT_KEY];
+            if (currentCat == null)
+            {
+                return Redirect("/Home/Login");
+            }
+
+            var followers = _context.Follower.Where(f => f.IsFollowing == currentCat.Id).ToList();
+
+            List<long> ids = new List<long>();
+
+            foreach (Follower follower in followers)
+            {
+                ids.Add(follower.IsFollowing);
+            }
+            ids.Add(currentCat.Id);
+
+            var model = new IndexModel();
+
+            var meows = _context.Meows.Where(s => ids.Contains(s.Cat.Id));
+            meows.OrderByDescending(s => s.Created);
             model.Messages = meows.ToList();
             return View(model);
         }
@@ -28,10 +44,12 @@ namespace Meow.Controllers
         [HttpPost]
         public ActionResult Index(IndexModel model)
         {
+            var currentCatId = ((Cat)Session[Constants.CURRENT_CAT_KEY]).Id;
             var meowMessage = new MeowMessage()
             {
                 Text = model.Text,
-                Cat = _context.Cats.FirstOrDefault(c => c.Id == 1),
+
+                Cat = _context.Cats.FirstOrDefault(c => c.Id == currentCatId),
                 Created = DateTime.Now
             };
    
@@ -41,6 +59,36 @@ namespace Meow.Controllers
 
 
             return Index();
+        }
+
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(ProfileCatModel model)
+        {
+            var loggedInCat = _context.FindByCredentials(model.Username, model.Password);
+            if (loggedInCat != null)
+            {
+                //put verified cat in sessioncontext
+                Session.Add(Constants.CURRENT_CAT_KEY, loggedInCat);
+                return Redirect("/");
+            } else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Logout()
+        {
+            if (Session[Constants.CURRENT_CAT_KEY] != null)
+            {
+                Session.Remove(Constants.CURRENT_CAT_KEY);
+            }
+            return Redirect("/");
         }
     }
 }

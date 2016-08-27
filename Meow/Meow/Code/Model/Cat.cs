@@ -19,7 +19,7 @@ namespace Meow.Code.Model
         public DateTime Created { get; set; }
         public string Email { get; set; }
         public virtual List<MeowMessage> Meows { get; set; }
-        public virtual List<Follower> Follower { get; set; }
+        //public virtual List<Follower> Follower { get; set; }
 
     }
 }

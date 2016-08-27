@@ -49,35 +49,17 @@ namespace Meow.Controllers
             };
             _context.AddCat(cat);
             _context.Save();
-            return Redirect($"/Account/ProfileCat/{cat.Id}");         
-        }
 
-        // GET: ProfileCat
-        public ActionResult ProfileCat(long? id)
-        {
-            if (id == null)
+            var loggedInCat = _context.FindByCredentials(model.Username, model.Password);
+            if (loggedInCat != null)
             {
-                return Redirect("/Account/NotFound");
+                //put verified cat in sessioncontext
+                Session.Add(Constants.CURRENT_CAT_KEY, loggedInCat);
             }
 
-            Cat cat = _context.Find(id ?? -1);
-            //greife ins backend
-            if (cat != null)
-            {
-                var model = new ProfileCatModel()
-                {
-                    CreatedAt = cat.Created,
-                    Email = cat.Email,
-                    Password = cat.Password,
-                    Username = cat.Username
-                };
-            
-                return View(model);
-            } else
-            {
-                return Redirect("/Account/NotFound");
-            }
+            return Redirect($"/Profile/ProfileCat/{cat.Id}");         
         }
+
     }
 }
  
