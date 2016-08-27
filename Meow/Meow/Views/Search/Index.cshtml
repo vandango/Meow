@@ -1,12 +1,19 @@
-﻿@model Meow.Models.Search.SearchModel
+﻿@using Meow.Code.Model
+@model Meow.Models.Search.SearchModel
 
 @{
     ViewBag.Title = "Search";
+
+    Cat cat = null;
+    if(Session[Constants.CURRENT_CAT_KEY] != null)
+    {
+        cat = (Cat)Session[Constants.CURRENT_CAT_KEY];
+    }
 }
 
 <form method="post">
     <div class="input-group">
-        <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="Search meows..." />
+        <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="Search meows..." value="@Model.SearchString" />
         <span class="input-group-btn">
             <button type="submit" name="Suchen" id="Suchen" class="btn btn-default">Suchen</button>
         </span>
@@ -15,11 +22,12 @@
 
 @if(Model != null && Model.Meows != null)
 {
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Datum</th>
                 <th>Inhalt</th>
+                <th>Von</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +36,22 @@
                 <tr>
                     <td>@Meow.Created.ToString("yyyy.MM.dd")</td>
                     <td>@Meow.Text</td>
+                    <td>
+                        <a href="/Profile/ProfileCat/@Meow.Cat.Id">@Meow.Cat.Username</a>
+
+                        @if (Meow.Cat.Id != cat.Id)
+                        {
+                            <text>&dash;</text>
+                            if (Model.CatsFollowing.Any(c => c.Id == Meow.Cat.Id))
+                            {
+                                <a href="/Follower/Follow/@Meow.Cat.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery)">Moew?</a>
+                            }
+                            else
+                            {
+                                <a href="/Follower/Unfollow/@Meow.Cat.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery)">Please no moew!</a>
+                            }
+                        }
+                    </td>
                 </tr>
             }
         </tbody>
