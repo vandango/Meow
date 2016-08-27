@@ -20,11 +20,11 @@ namespace Meow.Controllers
             if (!string.IsNullOrWhiteSpace(searchString))
             {
                 Cat currentCat = (Cat)Session[Constants.CURRENT_CAT_KEY];
-                var myFollowingIds = from f in _context.Follower where f.IsFollowing.Equals(currentCat.Id) select f.IsBeingFollowed;
-                var myFollowingCats = from c in _context.Cats where myFollowingIds.ToList().Contains(c.Id) select c;
+                var myFollowingIds = from f in _context.Followers where f.IsFollowing.Equals(currentCat.Id) select f.IsBeingFollowed;
+                var myFollowingCats = from c in _context.Cats() where myFollowingIds.ToList().Contains(c.Id) select c;
 
                 var meows = (
-                    from m in _context.Meows
+                    from m in _context.Meows()
                     where m.Text.Contains(searchString)
                     select m
                     ).ToList();
