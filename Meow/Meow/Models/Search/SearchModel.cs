@@ -7,7 +7,6 @@ namespace Meow.Models.Search
     public class SearchModel
     {
         public string SearchString { get; set; }
-        //TODO Change from <Cat> to <Meow>
         public List<MeowMessage> Meows { get; set; }
     }
 }
