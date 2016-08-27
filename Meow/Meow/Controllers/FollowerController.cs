@@ -25,13 +25,20 @@ namespace Meow.Controllers
 
             return View(new FollowerModel() { CatsBeingFollowed = myFollowerCats.ToList(), CatsFollowing = myFollowingCats.ToList() });
         }
-        public ActionResult Unfollow(long id)
+        public ActionResult Unfollow(long id, string returnUrl)
         {
             var FollowerToDelete = from f in _context.Follower() where f.IsBeingFollowed.Equals(id) && f.IsFollowing.Equals(this.getCurrentUserId()) select f;
             Follower Follower = FollowerToDelete.ToList()[0];
             _context.Follower().Remove(Follower);
             _context.SaveChanges();
-            return Redirect("/Follower");
+            return Redirect(returnUrl??"/");
+        }
+        public ActionResult Follow(long id, string returnUrl)
+        {
+            Follower Follower = new Follower { IsBeingFollowed = id, IsFollowing = this.getCurrentUserId() };
+            _context.Follower().Add(Follower);
+            _context.SaveChanges();
+            return Redirect(returnUrl??"/");
         }
 
         private long getCurrentUserId()
