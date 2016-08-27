@@ -9,6 +9,8 @@ namespace Meow.Models.Profile
         public string Username { get; set;}
         public string Email { get; set; }
         public string Password { get; set; }
+        public long Id { get; set; }
         public DateTime CreatedAt { get; set; }
+        public List<Cat> CatsFollowing { get; set; }
     }
 }

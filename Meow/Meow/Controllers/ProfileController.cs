@@ -48,13 +48,26 @@ namespace Meow.Controllers
             //greife ins backend
             if (cat != null)
             {
-                
+                var currentCat = (Cat)Session[Constants.CURRENT_CAT_KEY];
+                var followers = _context.Follower().Where(f => f.IsFollowing == currentCat.Id).ToList();
+
+                List<long> ids = new List<long>();
+
+                foreach (Follower follower in followers)
+                {
+                    ids.Add(follower.IsBeingFollowed);
+                }
+
+                var cats = _context.Cats().Where(c => ids.Contains(c.Id)).ToList();
+
                 var model = new ProfileCatModel()
                 {
                     CreatedAt = cat.Created,
                     Email = cat.Email,
                     Password = cat.Password,
-                    Username = cat.Username
+                    Username = cat.Username,
+                    Id = cat.Id,
+                    CatsFollowing = cats
                 };
             
                 return View(model);
