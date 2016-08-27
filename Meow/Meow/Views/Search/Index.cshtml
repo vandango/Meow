@@ -11,6 +11,12 @@
     }
 }
 
+<script>
+    $(function () {
+        $('#SearchString').focus();
+    });
+</script>
+
 <form method="post">
     <div class="input-group">
         <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="Search meows..." value="@Model.SearchString" />
