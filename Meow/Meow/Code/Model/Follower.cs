@@ -9,9 +9,7 @@ namespace Meow.Code.Model
     public class Follower
     {
         public long Id { get; set; }
-        [Required]
-        public virtual Cat IsFollowing { get; set; }
-        [Required]
-        public virtual Cat IsBeingFollowed { get; set; }
+        public long IsFollowing { get; set; }
+        public long IsBeingFollowed { get; set; }
     }
 }
