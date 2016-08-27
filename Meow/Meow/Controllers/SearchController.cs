@@ -20,7 +20,7 @@ namespace Meow.Controllers
         [HttpPost]
         public ActionResult Index(SearchModel model)
         {
-            var meows = from m in _context.Meows select m;
+            var meows = from m in _context.Meows() select m;
             string SearchString = model.SearchString;
             if (!String.IsNullOrEmpty(SearchString))
             {

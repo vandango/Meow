@@ -19,7 +19,7 @@ namespace Meow.Controllers
         }
         public ActionResult Index(FollowerModel model)
         {
-            var otherCats = from c in _context.Cats select c;
+            var otherCats = from c in _context.Cats() select c;
             //TODO Ersetzen mit getCurrentCat
             otherCats = otherCats.Where(c => !c.Id.Equals(1));
             return View(new FollowerModel() {catsBeingFollowed = otherCats.ToList() });

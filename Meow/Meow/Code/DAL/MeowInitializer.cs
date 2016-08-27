@@ -20,7 +20,7 @@ namespace Meow.Code.DAL
                 new Cat() { Email = "mhinz@mail.com", Password = "mhinz", Username = "mhinz", Created = DateTime.Now },
                 new Cat() { Email = "chuff@mail.com", Password = "chuff", Username = "chuff", Created = DateTime.Now }
             };
-            cats.ForEach(cat => context.Cats.Add(cat));
+            cats.ForEach(cat => context.Cats().Add(cat));
             context.SaveChanges();
             foreach(var cat in cats)
             {

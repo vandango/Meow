@@ -36,6 +36,7 @@ namespace Meow.Controllers
             //greife ins backend
             if (cat != null)
             {
+                
                 var model = new ProfileCatModel()
                 {
                     CreatedAt = cat.Created,

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Meow.Code.Model;
+using System.Data.Entity;
 
 namespace Meow.Code.DAL
 {
@@ -13,5 +14,9 @@ namespace Meow.Code.DAL
         void Save();
         Cat Find(long id);
         Cat FindByCredentials(string username, String password);
+        DbSet<Follower> Follower();
+        DbSet<MeowMessage> Meows();
+        DbSet<Cat> Cats();
+        int SaveChanges();
     }
 }
