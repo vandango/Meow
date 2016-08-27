@@ -18,23 +18,50 @@ namespace Meow.Code.DAL
         {
         }
 
-        public DbSet<Cat> Cats { get; set; }
-        public DbSet<MeowMessage> Meows { get; set; }
-        public DbSet<Follower> Follower { get; set; }
+        public DbSet<Cat> Kitties { get; set; }
+        public DbSet<MeowMessage> MeowMessages { get; set; }
+        public DbSet<Follower> Followers { get; set; }
+
+        public DbSet<Follower> Follower()
+        {
+            return Followers;
+        }
+
+        public DbSet<MeowMessage> Meows()
+        {
+            return MeowMessages;
+        }
+
+        public DbSet<Cat> Cats()
+        {
+            return Kitties;
+        }
 
         public void AddCat(Cat cat)
         {
-            Cats.Add(cat);
+            Kitties.Add(cat);
         }
 
         public Cat Find(long id)
         {
-            return Cats.Find(id);
+            return Kitties.Find(id);
+        }
+
+        public Cat FindByUsername(string Username)
+        {
+            var foundCats = Kitties.Where(c => c.Username == Username).ToList();
+            Cat loggedInCat = null;
+            if (foundCats.Count == 1)
+            {
+                loggedInCat = foundCats.ElementAt(0);
+            }
+
+            return loggedInCat;
         }
 
         public Cat FindByCredentials(string username, string password)
         {
-            var foundCats = Cats.Where(c => c.Username == username && c.Password == password).ToList();
+            var foundCats = Kitties.Where(c => c.Username == username && c.Password == password).ToList();
             Cat loggedInCat = null;
             if (foundCats.Count == 1)
             {

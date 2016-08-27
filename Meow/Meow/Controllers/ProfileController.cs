@@ -25,17 +25,30 @@ namespace Meow.Controllers
         }
 
         // GET: ProfileCat
-        public ActionResult ProfileCat(long? id)
+        public ActionResult ProfileCat(string id)
         {
             if (id == null)
             {
                 return Redirect("/static-html/NotFound.html");
             }
 
-            Cat cat = _context.Find(id ?? -1);
+            // if id instance of Long -> user Find by PrimaryKey
+            // otherwise: Find By Username
+            Cat cat = null;
+            try
+            {
+                long numericalId = Convert.ToInt64(id);
+                cat = _context.Find(numericalId);
+            }
+            catch (FormatException)
+            {
+                cat = _context.FindByUsername(id);
+            }
+
             //greife ins backend
             if (cat != null)
             {
+                
                 var model = new ProfileCatModel()
                 {
                     CreatedAt = cat.Created,

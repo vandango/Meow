@@ -49,6 +49,7 @@
                     @if (cat != null)
                     {
                         <li>@Html.ActionLink("Follower", "Index", "Follower")</li>
+                        <li><a href="/Profile/ProfileCat/@cat.Id">Profil</a></li>
                         <li>@Html.ActionLink("Logout (" + cat.Username + ")", "Logout", "Home")</li>
                     }
                     else

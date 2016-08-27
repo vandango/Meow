@@ -8,5 +8,6 @@ namespace Meow.Models.Search
     {
         public string SearchString { get; set; }
         public List<MeowMessage> Meows { get; set; }
+        public List<Cat> CatsFollowing { get; set; }
     }
 }

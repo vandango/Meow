@@ -12,7 +12,7 @@ namespace Meow.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly MeowContext _context = new MeowContext();
+        private readonly IMeowContext _context = new MeowContext();
         // GET: Home
         public ActionResult Index()
         {
@@ -23,19 +23,19 @@ namespace Meow.Controllers
                 return Redirect("/Home/Login");
             }
 
-            var followers = _context.Follower.Where(f => f.IsFollowing == currentCat.Id).ToList();
+            var followers = _context.Follower().Where(f => f.IsFollowing == currentCat.Id).ToList();
 
             List<long> ids = new List<long>();
 
             foreach (Follower follower in followers)
             {
-                ids.Add(follower.IsFollowing);
+                ids.Add(follower.IsBeingFollowed);
             }
             ids.Add(currentCat.Id);
 
             var model = new IndexModel();
 
-            var meows = _context.Meows.Where(s => ids.Contains(s.Cat.Id));
+            var meows = _context.Meows().Where(s => ids.Contains(s.Cat.Id));
             meows.OrderByDescending(s => s.Created);
             model.Messages = meows.ToList();
             return View(model);
@@ -49,11 +49,11 @@ namespace Meow.Controllers
             {
                 Text = model.Text,
 
-                Cat = _context.Cats.FirstOrDefault(c => c.Id == currentCatId),
+                Cat = _context.Cats().FirstOrDefault(c => c.Id == currentCatId),
                 Created = DateTime.Now
             };
    
-            _context.Meows.Add(meowMessage);
+            _context.Meows().Add(meowMessage);
             _context.SaveChanges();
 
 
