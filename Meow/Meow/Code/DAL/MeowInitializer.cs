@@ -33,7 +33,7 @@ namespace Meow.Code.DAL
                     }
                 }
             }
-            followers.ForEach(follower => context.Follower.Add(follower));
+            followers.ForEach(follower => context.Follower().Add(follower));
             context.SaveChanges();
             foreach (var cat in cats)
             {

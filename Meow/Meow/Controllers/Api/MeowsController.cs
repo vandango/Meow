@@ -67,7 +67,7 @@ namespace Meow.Controllers.Api
 				return BadRequest(ModelState);
 			}
 
-		    var cat = _meowContext.Cats.FirstOrDefault(c => c.Id == meow.CatId);
+		    var cat = _meowContext.Cats().FirstOrDefault(c => c.Id == meow.CatId);
 		    if (cat == null)
 		    {
 		        return NotFound();
@@ -98,7 +98,7 @@ namespace Meow.Controllers.Api
 				return BadRequest();
 			}
 
-            var existingMeow = _meowContext.Meows.Find(id);
+            var existingMeow = _meowContext.Meows().Find(id);
             if(existingMeow == null)
             {
                 return NotFound();
