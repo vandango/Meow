@@ -66,8 +66,10 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <footer class="container body-content" style="margin-top: 70px;">
+    <section class="container body-content" style="margin-top: 70px;">
         @RenderBody()
+    </section>
+    <footer class="container">
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Meow</p>
