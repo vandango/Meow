@@ -28,3 +28,26 @@ blockquote a[href^="https://twitter.com"] {
     color: #666;
     font-size: 12px;
 }
+
+.afterMeows {
+    clear:both;
+}
+
+.navbar-inverse {
+    background-color: #f5821f;
+    color: #000;
+    border-color: #080808;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #000;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #000;
+}
+
+form.meowbox {
+    max-width: 50%;
+    padding-left:2em;
+}
