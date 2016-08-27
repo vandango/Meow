@@ -1,7 +1,14 @@
 ﻿@model Meow.Models.Profile.ProfileCatModel
+@using Meow.Code.Model
 
 @{
     ViewBag.Title = "Katzenprofil";
+
+    Cat me = null;
+    if (Session[Constants.CURRENT_CAT_KEY] != null)
+    {
+        me = (Cat)Session[Constants.CURRENT_CAT_KEY];
+    }
 }
 
 <h1>Das Profil der Katze</h1>
@@ -16,6 +23,7 @@
                 <th>Passwort</th>
                 <th>E-Mail</th>
                 <th>Kätzchen seit</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +32,23 @@
                 <td>@Model.Password</td>
                 <td>@Model.Email</td>
                 <td>@Model.CreatedAt</td>
+                <td>
+                @if (me.Id != Model.Id)
+                {
+                    if (Model.CatsFollowing.Any(c => c.Id == Model.Id))
+                    {
+                        <a class="btn btn-danger" href="/Follower/Unfollow/@Model.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery )">
+                            Please no moew!
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-success" href="/Follower/Follow/@Model.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery )">
+                            Moew?
+                        </a>
+                    }
+                }
+                </td>
             </tr>
         </tbody>
     </table>

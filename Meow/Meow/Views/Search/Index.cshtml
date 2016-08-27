@@ -13,6 +13,12 @@
     var returnUrl = HttpUtility.UrlEncode(this.Request.Url.PathAndQuery + "/" + Model?.SearchString);
 }
 
+<script>
+    $(function () {
+        $('#SearchString').focus();
+    });
+</script>
+
 <form method="post">
     <div class="input-group">
         <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="Search meows..." value="@Model.SearchString" />
@@ -47,11 +53,11 @@
                             if (Model.CatsFollowing.Any(c => c.Id == Meow.Cat.Id))
                             {
                                 
-                                <a href="/Follower/Follow/@Meow.Cat.Id?returnUrl=@returnUrl">Can has follow?</a>
+                                <a href="/Follower/Unfollow/@Meow.Cat.Id?returnUrl=@returnUrl">Can has unfollow?</a>
                             }
                             else
                             {
-                                <a href="/Follower/Unfollow/@Meow.Cat.Id?returnUrl=@returnUrl">Do not like!</a>
+                                <a href="/Follower/Follow/@Meow.Cat.Id?returnUrl=@returnUrl">Can has follow?</a>
                             }
                         }
                     </td>

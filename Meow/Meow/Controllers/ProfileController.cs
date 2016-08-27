@@ -34,27 +34,46 @@ namespace Meow.Controllers
 
             // if id instance of Long -> user Find by PrimaryKey
             // otherwise: Find By Username
-            Cat cat = null;
+            Cat profileCat = null;
             try
             {
                 long numericalId = Convert.ToInt64(id);
-                cat = _context.Find(numericalId);
+                profileCat = _context.Find(numericalId);
             }
             catch (FormatException)
             {
-                cat = _context.FindByUsername(id);
+                profileCat = _context.FindByUsername(id);
             }
 
             //greife ins backend
-            if (cat != null)
+            if (profileCat != null)
             {
+                var currentCat = (Cat)Session[Constants.CURRENT_CAT_KEY];
+                var cats = new List<Cat>();
+               
+                if (currentCat.Id != profileCat.Id)
+                {
+                    var followers = _context.Follower().Where(f => f.IsFollowing == currentCat.Id).ToList();
+
+                    List<long> ids = new List<long>();
+
+                    foreach (Follower follower in followers)
+                    {
+                        ids.Add(follower.IsBeingFollowed);
+                    }
+
+                    cats = _context.Cats().Where(c => ids.Contains(c.Id)).ToList();
+                }
                 
+
                 var model = new ProfileCatModel()
                 {
-                    CreatedAt = cat.Created,
-                    Email = cat.Email,
-                    Password = cat.Password,
-                    Username = cat.Username
+                    CreatedAt = profileCat.Created,
+                    Email = profileCat.Email,
+                    Password = profileCat.Password,
+                    Username = profileCat.Username,
+                    Id = profileCat.Id,
+                    CatsFollowing = cats
                 };
             
                 return View(model);
