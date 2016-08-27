@@ -32,6 +32,18 @@ namespace Meow.Code.DAL
             return Cats.Find(id);
         }
 
+        public Cat FindByCredentials(string username, string password)
+        {
+            var foundCats = Cats.Where(c => c.Username == username && c.Password == password).ToList();
+            Cat loggedInCat = null;
+            if (foundCats.Count == 1)
+            {
+                loggedInCat = foundCats.ElementAt(0);
+            }
+
+            return loggedInCat;
+        }
+
         public void Save()
         {
             try
