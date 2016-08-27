@@ -9,6 +9,8 @@
     {
         cat = (Cat)Session[Constants.CURRENT_CAT_KEY];
     }
+
+    var returnUrl = HttpUtility.UrlEncode(this.Request.Url.PathAndQuery + "/" + Model?.SearchString);
 }
 
 <form method="post">
@@ -37,18 +39,19 @@
                     <td>@Meow.Created.ToString("yyyy.MM.dd")</td>
                     <td>@Meow.Text</td>
                     <td>
-                        <a href="/Profile/ProfileCat/@Meow.Cat.Id">@Meow.Cat.Username</a>
+                        <a href="/Profile/ProfileCat/@Meow.Cat.Username">@Meow.Cat.Username</a>
 
                         @if (Meow.Cat.Id != cat.Id)
                         {
                             <text>&dash;</text>
                             if (Model.CatsFollowing.Any(c => c.Id == Meow.Cat.Id))
                             {
-                                <a href="/Follower/Follow/@Meow.Cat.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery + "/" + Model.SearchString)">Moew?</a>
+                                
+                                <a href="/Follower/Follow/@Meow.Cat.Id?returnUrl=@returnUrl">Can has follow?</a>
                             }
                             else
                             {
-                                <a href="/Follower/Unfollow/@Meow.Cat.Id?returnUrl=@HttpUtility.UrlEncode(this.Request.Url.PathAndQuery + "/" + Model.SearchString)">Please no moew!</a>
+                                <a href="/Follower/Unfollow/@Meow.Cat.Id?returnUrl=@returnUrl">Do not like!</a>
                             }
                         }
                     </td>
