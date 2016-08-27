@@ -24,7 +24,6 @@ namespace Meow.Controllers
             string SearchString = model.SearchString;
             if (!String.IsNullOrEmpty(SearchString))
             {
-                //TODO Change from Cats to Meows
                 meows = meows.Where(m => m.Text.Contains(SearchString));
             }
             return View(new SearchModel() {Meows = meows.ToList()});
