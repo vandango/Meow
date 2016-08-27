@@ -36,8 +36,7 @@ namespace Meow.Controllers
             var model = new IndexModel();
 
             var meows = _context.Meows().Where(s => ids.Contains(s.Cat.Id));
-            meows.OrderByDescending(s => s.Created);
-            model.Messages = meows.ToList();
+            model.Messages = meows.OrderByDescending(s => s.Created).ToList();
             return View(model);
         }
 
