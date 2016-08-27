@@ -15,14 +15,19 @@ namespace Meow.Controllers
         // GET: List all users (being followed and not being followed)
         public ActionResult Index()
         {
-            return View();
+            //TODO Ersetzen mit getCurrentCat.getId o.ä.
+            long ownId = 1;
+            var myFollowerIds = from f in _context.Follower where f.IsBeingFollowed.Equals(ownId) select f.IsFollowing;
+            var myFollowerCats = from c in _context.Cats where myFollowerIds.ToList().Contains(c.Id) select c;
+
+            var myFollowingIds = from f in _context.Follower where f.IsFollowing.Equals(ownId) select f.IsBeingFollowed;
+            var myFollowingCats = from c in _context.Cats where myFollowingIds.ToList().Contains(c.Id) select c;
+
+            return View(new FollowerModel() { CatsBeingFollowed = myFollowerCats.ToList(), CatsFollowing = myFollowingCats.ToList() });
         }
-        public ActionResult Index(FollowerModel model)
+        public ActionResult Follow(FollowerModel model)
         {
-            var otherCats = from c in _context.Cats select c;
-            //TODO Ersetzen mit getCurrentCat
-            otherCats = otherCats.Where(c => !c.Id.Equals(1));
-            return View(new FollowerModel() {catsBeingFollowed = otherCats.ToList() });
+            return View(model);
         }
     }
 }

@@ -44,10 +44,12 @@ namespace Meow.Controllers
         [HttpPost]
         public ActionResult Index(IndexModel model)
         {
+            var currentCatId = ((Cat)Session[Constants.CURRENT_CAT_KEY]).Id;
             var meowMessage = new MeowMessage()
             {
                 Text = model.Text,
-                Cat = (Cat)Session[Constants.CURRENT_CAT_KEY],
+
+                Cat = _context.Cats.FirstOrDefault(c => c.Id == currentCatId),
                 Created = DateTime.Now
             };
    
