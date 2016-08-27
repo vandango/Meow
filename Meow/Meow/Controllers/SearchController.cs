@@ -30,6 +30,7 @@ namespace Meow.Controllers
                 var meows = (
                     from m in _context.Meows()
                     where m.Text.Contains(searchString)
+                    || m.Cat.Username.Contains(searchString)
                     select m
                     ).ToList();
 
