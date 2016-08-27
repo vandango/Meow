@@ -1,7 +1,41 @@
-﻿@model Meow.Models.Search.SearchModel
+﻿@model Meow.Models.Follower.FollowerModel
 
 @{
     ViewBag.Title = "Follower verwalten";
 }
 
-Hallo
+Verwaltung der Follower
+@if (Model != null && Model.CatsBeingFollowed != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="2">Cats, denen ich folge</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var CatFollowing in Model.CatsFollowing)
+            {
+                <tr>
+                    <td>@CatFollowing.Username</td>
+                    <td><button id="unfollow" name="unfollow">Nicht mehr folgen</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cats, die mir folgen</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var CatBeingFollowed in Model.CatsBeingFollowed)
+            {
+                <tr>
+                    <td>@CatBeingFollowed.Username</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

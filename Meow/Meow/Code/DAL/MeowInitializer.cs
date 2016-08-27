@@ -22,7 +22,20 @@ namespace Meow.Code.DAL
             };
             cats.ForEach(cat => context.Cats.Add(cat));
             context.SaveChanges();
-            foreach(var cat in cats)
+            var followers = new List<Follower>();
+            for (int i = 1; i < 5; i++)
+            {
+                for (int j = 2; j < 6; j++) {
+                    //Katze kann sich nicht selbst folgen
+                    if (j != i)
+                    {
+                        followers.Add(new Follower() { IsBeingFollowed = i, IsFollowing = j });
+                    }
+                }
+            }
+            followers.ForEach(follower => context.Follower.Add(follower));
+            context.SaveChanges();
+            foreach (var cat in cats)
             {
                 var meowMessages = new List<MeowMessage>()
                 {

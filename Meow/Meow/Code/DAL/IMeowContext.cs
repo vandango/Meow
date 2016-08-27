@@ -12,5 +12,6 @@ namespace Meow.Code.DAL
         void AddCat(Cat cat);
         void Save();
         Cat Find(long id);
+        Cat FindByCredentials(string username, String password);
     }
 }

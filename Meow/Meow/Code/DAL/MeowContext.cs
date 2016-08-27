@@ -20,7 +20,7 @@ namespace Meow.Code.DAL
 
         public DbSet<Cat> Cats { get; set; }
         public DbSet<MeowMessage> Meows { get; set; }
-        //public DbSet<Follower> Follower { get; set; }
+        public DbSet<Follower> Follower { get; set; }
 
         public void AddCat(Cat cat)
         {
@@ -30,6 +30,18 @@ namespace Meow.Code.DAL
         public Cat Find(long id)
         {
             return Cats.Find(id);
+        }
+
+        public Cat FindByCredentials(string username, string password)
+        {
+            var foundCats = Cats.Where(c => c.Username == username && c.Password == password).ToList();
+            Cat loggedInCat = null;
+            if (foundCats.Count == 1)
+            {
+                loggedInCat = foundCats.ElementAt(0);
+            }
+
+            return loggedInCat;
         }
 
         public void Save()
