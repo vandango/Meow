@@ -20,15 +20,21 @@ namespace Meow.Controllers
 
             Cat currentCat = (Cat)Session["CurrentCat"];
 
-            var ids = _context.Follower.Where(f => f.IsFollowing == currentCat.Id).ToList();
+            var followers = _context.Follower.Where(f => f.IsFollowing == currentCat.Id).ToList();
 
+            List<long> ids = new List<long>();
 
+            foreach(Follower follower in followers)
+            {
+                ids.Add(follower.IsFollowing);
+            }
+            ids.Add(currentCat.Id);
 
             var model = new IndexModel();
             model.List = _context.Cats.ToList();
 
             
-            var meows = _context.Meows.Where(s => s.Cat.Id == currentCat.Id);
+            var meows = _context.Meows.Where(s =>  ids.Contains(s.Cat.Id));
             meows.OrderByDescending(s => s.Created);
             model.Messages = meows.ToList();
             return View(model);
