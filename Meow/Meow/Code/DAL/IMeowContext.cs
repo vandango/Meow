@@ -14,6 +14,7 @@ namespace Meow.Code.DAL
         void Save();
         Cat Find(long id);
         Cat FindByCredentials(string username, String password);
+        Cat FindByUsername(string username);
         DbSet<Follower> Follower();
         DbSet<MeowMessage> Meows();
         DbSet<Cat> Cats();
