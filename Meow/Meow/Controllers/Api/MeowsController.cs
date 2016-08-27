@@ -20,7 +20,7 @@ namespace Meow.Controllers.Api
 			return _meowContext.Meows().Count(e => e.Id == id) > 0;
 		}
 
-		// GET: api/Meow
+		// GET: api/Meows
 		public IQueryable<MeowMessageApi> GetMeowMessages()
 		{
 			return from m 
