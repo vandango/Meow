@@ -21,7 +21,11 @@ namespace Meow.Controllers
             {
                 Cat currentCat = (Cat)Session[Constants.CURRENT_CAT_KEY];
                 var myFollowingIds = from f in _context.Followers where f.IsFollowing.Equals(currentCat.Id) select f.IsBeingFollowed;
-                var myFollowingCats = from c in _context.Cats() where myFollowingIds.ToList().Contains(c.Id) select c;
+                var myFollowingCats = (
+                    from c in _context.Kitties
+                    where myFollowingIds.ToList().Contains(c.Id)
+                    select c
+                    ).ToList();
 
                 var meows = (
                     from m in _context.Meows()
@@ -33,7 +37,7 @@ namespace Meow.Controllers
                 {
                     Meows = meows,
                     SearchString = searchString,
-                    CatsFollowing = myFollowingCats.ToList()
+                    CatsFollowing = myFollowingCats
                 });
             }
 
