@@ -1,0 +1,3 @@
+meow-db
+Cofinpro.123
+MeowDbServer.database.windows.net

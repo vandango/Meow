@@ -5,24 +5,39 @@ using System.Web;
 using System.Web.Mvc;
 using Meow.Models.Follower;
 using Meow.Code.DAL;
+using Meow.Code.Model;
 
 namespace Meow.Controllers
 {
     public class FollowerController : Controller
     {
         private readonly MeowContext _context = new MeowContext();
+        //TODO Ersetzen mit getCurrentCat.getId o.ä.
 
-        // GET: List all users (being followed and not being followed)
         public ActionResult Index()
         {
-            return View();
+            long uId = this.getCurrentUserId();
+            var myFollowerIds = from f in _context.Follower where f.IsBeingFollowed.Equals(uId) select f.IsFollowing;
+            var myFollowerCats = from c in _context.Cats where myFollowerIds.ToList().Contains(c.Id) select c;
+
+            var myFollowingIds = from f in _context.Follower where f.IsFollowing.Equals(uId) select f.IsBeingFollowed;
+            var myFollowingCats = from c in _context.Cats where myFollowingIds.ToList().Contains(c.Id) select c;
+
+            return View(new FollowerModel() { CatsBeingFollowed = myFollowerCats.ToList(), CatsFollowing = myFollowingCats.ToList() });
         }
-        public ActionResult Index(FollowerModel model)
+        public ActionResult Unfollow(long id)
         {
-            var otherCats = from c in _context.Cats() select c;
-            //TODO Ersetzen mit getCurrentCat
-            otherCats = otherCats.Where(c => !c.Id.Equals(1));
-            return View(new FollowerModel() {catsBeingFollowed = otherCats.ToList() });
+            var FollowerToDelete = from f in _context.Follower where f.IsBeingFollowed.Equals(id) && f.IsFollowing.Equals(this.getCurrentUserId()) select f;
+            Follower Follower = FollowerToDelete.ToList()[0];
+            _context.Follower.Remove(Follower);
+            _context.SaveChanges();
+            return Redirect("/Follower");
+        }
+
+        private long getCurrentUserId()
+        {
+            Cat currentCat = (Cat)Session[Constants.CURRENT_CAT_KEY];
+            return currentCat.Id;
         }
     }
 }

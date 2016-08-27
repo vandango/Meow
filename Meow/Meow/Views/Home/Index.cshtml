@@ -6,30 +6,22 @@
 <br/>
 <br/>
 
-<form class="form-horizontal" method="post">
+<form class="form-horizontal center-block" method="post">
     <input type="text" class="col-sm-5" name="Text"/>
     <button type="submit" >Meow!</button>
 </form>
 
-<br />
-<br />
-<br />
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Meow</th><th>meowed by</th><th>at</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var message in Model.Messages)
+@foreach (var message in Model.Messages)
             {
-            <tr>
-                <td>@message.Text</td>
-                <td>@message.Cat.Username</td>
-                <td>@message.Created.ToString("dd.MM.yyyy")</td>
-            </tr>
-        }   </tbody>
-</table>
+    <blockquote class="col-lg-4">
+        <p>@message.Text</p>
+        <footer>
+            @message.Cat.Username
+            <a href="/Home/Index">@message.Created.ToString("dd.MM.yyyy")</a>
+        </footer>
+    </blockquote>
+}
+<p/>
+
 
 

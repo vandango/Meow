@@ -5,3 +5,37 @@
 }
 
 Verwaltung der Follower
+@if (Model != null && Model.CatsBeingFollowed != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="2">Cats, denen ich folge</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var CatFollowing in Model.CatsFollowing)
+            {
+                <tr>
+                    <td>@CatFollowing.Username</td>
+                    <td><a href="/Follower/Unfollow/@CatFollowing.Id">Nicht mehr folgen</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cats, die mir folgen</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var CatBeingFollowed in Model.CatsBeingFollowed)
+            {
+                <tr>
+                    <td>@CatBeingFollowed.Username</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

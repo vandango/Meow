@@ -29,7 +29,7 @@ namespace Meow.Controllers
 
             foreach (Follower follower in followers)
             {
-                ids.Add(follower.IsFollowing);
+                ids.Add(follower.IsBeingFollowed);
             }
             ids.Add(currentCat.Id);
 
@@ -80,6 +80,15 @@ namespace Meow.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult Logout()
+        {
+            if (Session[Constants.CURRENT_CAT_KEY] != null)
+            {
+                Session.Remove(Constants.CURRENT_CAT_KEY);
+            }
+            return Redirect("/");
         }
     }
 }

@@ -1,0 +1,30 @@
+﻿
+blockquote {
+    display: inline-block;
+    min-width: 200px;
+    background: url(/Content/lion.jpeg);
+    background-position: bottom right;
+    background-repeat:no-repeat;
+    padding: 16px;
+    margin: 10px 0;
+    max-width: 468px;
+    border: rgba(104, 209, 240, 0.40) 1px solid;
+    border-top-color: rgba(104, 209, 240, 0.40);
+    border-bottom-color: rgba(104, 209, 240, 0.40);
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    font: bold 14px/18px Helvetica, Arial, sans-serif;
+    color: #000;
+}
+ 
+blockquote p {
+    font: normal 18px/24px Georgia, "Times New Roman", Palatino, serif;
+    margin: 0 5px 10px 0;
+    
+}
+
+blockquote a[href^="https://twitter.com"] {
+    font-weight: normal;
+    color: #666;
+    font-size: 12px;
+}
