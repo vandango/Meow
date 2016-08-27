@@ -16,9 +16,12 @@ namespace Meow.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            Session["CurrentCat"] = _context.Cats.FirstOrDefault(c => c.Id == 1);
 
-            Cat currentCat = (Cat)Session["CurrentCat"];
+            Cat currentCat = (Cat)Session[Constants.CURRENT_CAT_KEY];
+            if (currentCat == null)
+            {
+                return Redirect("/Home/Login");
+            }
 
             var followers = _context.Follower.Where(f => f.IsFollowing == currentCat.Id).ToList();
 
@@ -44,7 +47,7 @@ namespace Meow.Controllers
             var meowMessage = new MeowMessage()
             {
                 Text = model.Text,
-                Cat = _context.Cats.FirstOrDefault(c => c.Id == 1),
+                Cat = (Cat)Session[Constants.CURRENT_CAT_KEY],
                 Created = DateTime.Now
             };
    
@@ -54,6 +57,12 @@ namespace Meow.Controllers
 
 
             return Index();
+        }
+
+
+        public ActionResult Login()
+        {
+            return View();
         }
 
         [HttpPost]

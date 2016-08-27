@@ -236,7 +236,7 @@
     <Content Include="Views\_Shared\_Error.cshtml" />
     <Content Include="static-html\NotFound.html" />
     <Content Include="static-html\Credits.html" />
-    <Content Include="Views\Profile\Login.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
